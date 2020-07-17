@@ -52,6 +52,94 @@ $ git add assets/  # 특정 폴더
 
 ```bash
 $ git status
+On branch master
+Your branch is up to date with 'origin/master'.
 
+Untracked files:
+  (use "git add <file>..." to include in what will be committed)
+        startcamp/git_basic.md
+
+nothing added to commit but untracked files present (use "git add" to track)
 ```
 
+
+
+`add` 후 상태
+
+```bash
+$ git status
+On branch master
+Your branch is up to date with 'origin/master'.
+
+Changes to be committed:
+  (use "git restore --staged <file>..." to unstage)
+        new file:   startcamp/git_basic.md
+```
+
+
+
+### 3. Commit
+
+`commit`은 **이력을 확정**짓는 명령어다. 해당 시점에서 스냅샷을 찍는다.
+
+`commit`을 할때는 반드시 메시지를 입력해야 한다. 메시지는 변경사항에 대한 정확한 내용을 파악할 수 있게끔 작성한다.
+
+```bash
+$ git commit -m "git_basic.md 파일 추가"
+[master 908fdaa] git_basic.md ?뚯씪 異붽?
+ 1 file changed, 57 insertions(+)
+ create mode 100644 startcamp/git_basic.md
+```
+
+
+
+지금까지 작성한 이력들을 확인하기 위해 `git log` 명령어를 사용할 수 있다.
+
+```bash
+$ git log
+commit 908fdaabbd86b402c4b5c0e25076498dc6aeaa38 (HEAD -> master)
+Author: lim-sorry <prime18k@gmail.com>
+Date:   Fri Jul 17 15:24:45 2020 +0900
+
+    git_basic.md 파일 추가
+```
+
+
+
+## 원격 저장소(Remote Repository) 활용하기
+
+원격 저장소를 제공하는 서비스는 여러 종류가 있지만, 대표적인 Github를 기준으로 작성한다.
+
+
+
+### 준비사항
+
+- Github에 저장소 생성
+
+
+
+### 원격 저장소 등록
+
+```bash
+$ git remote add origin URL
+```
+
+- 원격 저장소(`remote`)로 `origin`이라는 이름으로 `URL`을 추가(`add`)한다.
+- 등록된 원격 저장소 현황을 확인하기 위해서 `git remote -v` 명령어를 실행한다.
+
+
+
+### 원격 저장소에 업로드(push)
+
+```bash
+$ git push origin masters
+```
+
+- `origin`이라는 이름으로 설정된 저장소 URL로 `master` 브랜치를 업로드(`push`)한다.
+- 이후 수정사항이 발생할 때마다 `add`, `commit`, `push` 작업을 수행한다.
+
+
+
+**항상 모든 명령어를 입력할 때마다 관련 상태를 확인하는 습관을 기르자!**
+
+`git status`, `git remote -v`, `git log`
