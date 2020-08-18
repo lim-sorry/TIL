@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    lotto
+{% endblock title %}
+
+{% block body %}
+    <h1>로또 당첨 횟수를 알아보자.</h1>
+    <hr>
+    <h2>이번 회차 당첨번호 : {{ win_number }} + {{ bns_number }}</h2>
+    <ul>
+        {% for result in results %}
+            {% if forloop.counter < 6 %}
+                <li>{{ forloop.counter }}등 : {{ result }}번</li>
+            {% else %}
+                <li>꽝 : {{ result }}번</li>
+            {% endif %}
+        {% endfor %}
+    </ul>
+{% endblock body %}
