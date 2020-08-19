@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+
+
+{% block title %}
+    card
+{% endblock title %}
+
+
+{% block content %}
+    <div class="row justify-content-center">
+        {% for article in articles %}
+            <div class="col">
+                <div class="card mx-auto my-4" style="width: 18rem;">
+                    <img class="card-img-top" src="https://i.picsum.photos/id/744/300/300.jpg?hmac=NaUe_DGRtci9OKJlYBc5cCeNYVOXHoql8hZIyKYdLSQ" alt="Card image cap">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ article.0 }}</h5>
+                        <p class="card-text">{{ article.1 }}</p>
+                        <a href="../community/" class="btn btn-primary">Post Article</a>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+{% endblock content %}
