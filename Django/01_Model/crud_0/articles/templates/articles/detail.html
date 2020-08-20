@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+
+
+{% block title %}
+  {{ article.title }}
+{% endblock title %}
+
+
+{% block content %}
+  <h2 class="text-center">DETAIL</h2>
+  <h3>{{ article.pk }}번째 글</h3>
+  <hr>
+  <p>글 제목: {{ article.title }}</p>
+  <p>글 내용: {{ article.content }}</p>
+  <p>작성날짜: {{ article.created_at|date:"DATETIME_FORMAT" }}</p>
+  <p>수정날짜: {{ article.updated_at|date:"DATETIME_FORMAT" }}</p>
+  <hr>
+  <div class="d-flex">
+    <a href="{% url 'articles:edit' article.pk %}" class='btn btn-warning'>[EDIT]</a>
+    <form action="{% url 'articles:delete' article.pk %}" method="POST">
+      {% csrf_token %}
+      <input type="submit" value='[DELETE]' class='btn btn-danger'>
+    </form>
+    <a href="{% url 'articles:index' %}" class='btn btn-secondary'>[BACK]</a>
+  </div>
+  
+{% endblock content %}

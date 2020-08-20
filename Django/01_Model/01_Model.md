@@ -102,3 +102,21 @@ Article.objects.create(title='title', content='content')
 
 ### Update & Delete
 
+- `delete()`
+  - 객체를 삭제한다.
+- `save()`
+  - 객체의 속성을 변경한 후 다시 저장한다.
+
+
+
+### GET & POST
+
+- `GET`
+  - 사용자의 요청에 응답한다.
+  - `url` 주소로 새로운 웹을 요청할 때
+  - `a` 태그로 다른 웹을 요청할 때
+- `POST`
+  - 데이터베이스에 접근한다.
+  - `form` 태그로 데이터베이스 접근을 요청할 때
+  - `{% csrf_token %}`을 발급하여 검증을 받아야 접근할 수 있다.
+
