@@ -1,0 +1,36 @@
+# 초기 값은 최댓값으로 설정한다.
+minValue = 13 * N
+
+# card에 있는 것을 작은 순으로 정렬하고 이때 무늬에 해당하는 정보인 index를 같이 저장한다.
+card_sorted = [[] for _ in range(N)]
+for c in range(N):
+    for i in range(4):
+        temp = i
+        for j in range(i,4):
+            if card[c][temp] > card[c][j]:
+                temp = j
+        card_sorted[c].append([card[c][temp], temp])
+        card[c][i], card[c][temp] = card[c][temp], card[c][i]
+
+# stack을 생성하고 Game함수를 실행한다.
+for i in range(4):
+    stack = [i]
+    Game(idx=stack[-1], std_num=1)
+
+
+# 재귀함수로 깊이탐색을 실행한다
+def Game(idx, std_num)
+    if std_num == N:
+        sum = 0
+        for i in range(N):
+            sum += card_sorted[i][stack[i]][0]
+        minValue = min(minValue, sum)
+    for i in range(4):
+        if card_sorted[std_num][i][1] != idx:
+            stack.append(i)
+            Game(card_sorted[std_num][i][1], std_num+1)
+            stack.pop()
+
+# 깊이 탐색을 실행할 때 카드 번호가 적은 순으로 정렬을 하면서 무늬에 대한 정보를 저장해서
+되도록 작은 숫자 먼저 더할 수 있도록 했다. 이때 이전 학생이 고른 무늬를 idx로 받아서 비교한다.
+N 깊이까지 다 더하면 합을 minValue와 비교하여 저장한다.
