@@ -8,4 +8,9 @@
       <p>{{ user.username }}</p>
     {% endfor %}
   </div>
+  <hr>
+  <form action="{% url 'accounts:delete' %}" method="POST">
+    {% csrf_token %}
+    <input type="submit" value="delete">
+  </form>
 {% endblock content %}

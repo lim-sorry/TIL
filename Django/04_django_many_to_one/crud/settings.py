@@ -32,11 +32,8 @@ ALLOWED_HOSTS = []
 
 INSTALLED_APPS = [
     'articles',
-
-    'imagekit',
-    'bootstrap4',
+    'accounts',
     'django_extensions',
-    
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -123,19 +120,11 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
 
-# 정적 파일을 참조할 때 생성되는(사용하는) 주소 
 STATIC_URL = '/static/'
-
-# App 내의 static 폴더 외에 추가적인 탐색 장소를 설정
 STATICFILES_DIRS = [
     BASE_DIR / 'crud' / 'static',
 ]
 
-
-# Media files
-
-# 사용자가 업로드 한 파일을 참조할 때 생성되는(사용하는) 주소 (실제 위치한 디렉토리 아님)
-MEDIA_URL = '/media/'
-
-# 사용자가 업로드 한 파일이 위치하는 공간
-MEDIA_ROOT = BASE_DIR / 'media'
+DAYS_IN_SECONDS = 86400
+SESSION_COOKIE_AGE = DAYS_IN_SECONDS
+SESSION_SAVE_EVERY_REQUEST = True

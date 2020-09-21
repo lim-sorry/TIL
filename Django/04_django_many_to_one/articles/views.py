@@ -1,11 +1,11 @@
 from django.shortcuts import render, redirect
+from django.contrib.auth.decorators import login_required
 from django.views.decorators.http import require_http_methods, require_POST
 from .models import Article
 from .forms import ArticleForm
 
 # Create your views here.
 def index(request):
-    # articles = Article.objects.all()
     articles = Article.objects.order_by('-pk')
     context = {
         'articles': articles,
@@ -13,10 +13,11 @@ def index(request):
     return render(request, 'articles/index.html', context)
 
 
+@login_required
 @require_http_methods(['GET', 'POST'])
 def create(request):
     if request.method == 'POST':
-        form = ArticleForm(request.POST, request.FILES)
+        form = ArticleForm(request.POST) 
         if form.is_valid():
             article = form.save()
             return redirect('articles:detail', article.pk)
@@ -36,10 +37,12 @@ def detail(request, pk):
     return render(request, 'articles/detail.html', context)
 
 
+@login_required
+@require_http_methods(['GET', 'POST'])
 def update(request, pk):
     article = Article.objects.get(pk=pk)
     if request.method == 'POST':
-        form = ArticleForm(request.POST, request.FILES, instance=article)
+        form = ArticleForm(request.POST, instance=article)
         if form.is_valid():
             form.save()
             return redirect('articles:detail', article.pk)
@@ -54,6 +57,7 @@ def update(request, pk):
 
 @require_POST
 def delete(request, pk):
-    article = Article.objects.get(pk=pk)
-    article.delete()
+    if request.user.is_authenticated:
+        article = Article.objects.get(pk=pk)
+        article.delete()
     return redirect('articles:index')
