@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>3. Vue v-for</title>
+</head>
+<body>
+  <div id="app">
+    <p>{{ message }}</p>
+    <ul>
+      <li v-for="todo in todos">
+        {{ todo.content }}
+      </li>
+    </ul>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  <script>
+    const app = new Vue({
+      el: '#app',
+      data: {
+        message: 'Todo List',
+        todos: [
+          { id:1, content: 'Python', completed:false },
+          { id:2, content: 'Django', completed:false },
+          { id:3, content: 'Vuejs', completed:false },
+        ]
+      }
+    })
+  </script>
+</body>
+</html>

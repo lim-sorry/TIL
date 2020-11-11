@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lunch & Lotto</title>
+</head>
+<body>
+  <div id="app">
+    <h3>점심메뉴</h1>
+    <button @click="pickLunch">Pick One</button>
+    <p>{{ selectedLunch }}</p>
+    <hr>
+    <h3>로또</h3>
+    <button @click="pickLotto">Get Lucky Numbers</button>
+    <p>{{ lottoNum }}</p>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.20/lodash.min.js"></script>
+  <script>
+    const app = new Vue ({
+      el: '#app',
+      data: {
+        lunchList: ['국밥','라면','치킨','피자','짜장면','떡볶이','김밥'],
+        selectedLunch: '',
+        lottoNums: _.range(1, 46),
+        lottoNum: '',
+      },
+      methods: {
+        pickLunch: function () {
+          this.selectedLunch = _.sample(this.lunchList)
+        },
+        pickLotto: function () {
+          const randomNums = _.sampleSize(this.lottoNums, 6)
+          this.lottoNum = _.sortBy(randomNums)
+        },
+      }
+    })
+    
+  </script>
+</body>
+</html>

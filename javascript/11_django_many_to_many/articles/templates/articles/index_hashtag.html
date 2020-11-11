@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <h1 class="text-center">{{ hashtag }}</h1>
+  <hr>
+  <p>{{ articles.count }}개의 게시글이 있습니다.</p>
+  <ul>
+    {% for article in articles %}
+      <li><a href="{% url 'articles:detail' article.pk %}">{{ article.title }}</a></li>
+    {% endfor %}
+  </ul>
+{% endblock content %}

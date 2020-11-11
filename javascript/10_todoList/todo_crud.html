@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Todo List</title>
+  <style>
+    ul > li {
+      list-style-type: none;
+    }
+    .done {
+      text-decoration: line-through;
+    }
+  </style>
+</head>
+<body>
+  <form action="#" id="todo-form">
+    <input type="text">
+    <button>Add</button>
+  </form>
+  <ul></ul>
+
+  <script>
+    function addTodo (userInput) {
+      const todoLi = document.createElement('li')
+      const todoCheckbox = document.createElement('input')
+      todoCheckbox.type = 'checkbox'
+      todoCheckbox.addEventListener('click', event => {
+        if (todoCheckbox.checked) {
+          todoLi.classList.add('done')
+        } else {
+          todoLi.classList.remove('done')
+        }
+      })
+      const todoContent = document.createTextNode(userInput)
+      const editButton = createButton('Edit')
+      editButton.addEventListener('click', event => {
+        updateTodo(todoContent, todoLi, todoCheckbox, todoContent, editButton)
+      })
+      const deleteButton = createButton('Del')
+      deleteButton.addEventListener('click', event => todoLi.remove())
+
+      todoLi.append(todoCheckbox, todoContent, editButton, deleteButton)
+      todoUl.append(todoLi)
+    }
+
+    function updateTodo (todoContent, todoLi, todoCheckbox, todoContent, editButton) {
+      const editInput = document.createElement('input')
+      editInput.value = todoContent.data
+      const editDoneButton = createButton('Done')
+      editDoneButton.addEventListener('click', event => {
+        todoContent.data = editInput.value
+
+        todoLi.prepend(todoCheckbox, todoContent, editButton)
+        editInput.remove()
+        editDoneButton.remove()
+      })
+
+      todoLi.prepend(todoCheckbox, editInput, editDoneButton)
+      todoContent.remove()
+      editButton.remove()
+    }
+
+    function createButton (buttonName) {
+      const button = document.createElement('button')
+
+      button.innerText = buttonName
+      button.style.marginLeft = '5px'
+
+      return button
+    }
+
+    const todoForm = document.querySelector('#todo-form')
+    const todoFormInput = document.querySelector('#todo-form > input')
+    const todoUl = document.querySelector('ul')
+
+    todoForm.addEventListener('submit', function (event) { // removeEvent할때 어떻게 하는가?
+      addTodo(todoFormInput.value)
+      todoFormInput.value = ''
+    })
+    todoForm.removeEventListener
+  </script>  
+</body>
+</html>
